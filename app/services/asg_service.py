@@ -26,11 +26,11 @@ class AutoScalingService:
             "instances": len(asg["Instances"]),
         }
 
-    def start_gpu(self):
+    def start_gpu(self, desired_capacity: int = 1):
         return self.client.update_auto_scaling_group(
             AutoScalingGroupName=self.config.gpu_asg_name,
-            MinSize=1,
-            DesiredCapacity=1,
+            MinSize=desired_capacity,
+            DesiredCapacity=desired_capacity,
         )
 
     def stop_gpu(self):

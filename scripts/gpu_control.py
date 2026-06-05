@@ -1,27 +1,12 @@
-﻿import sys
+import sys
 from pathlib import Path
 
-# Add project root to Python path
+# Add project root to Python path when this compatibility script is run directly.
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from app.services.asg_service import AutoScalingService
+from app.cli import app
 
-asg = AutoScalingService()
 
-if len(sys.argv) < 2:
-    print("Usage: start | stop | status")
-    exit(1)
-
-cmd = sys.argv[1]
-
-if cmd == "start":
-    asg.start_gpu()
-    print("GPU ASG starting...")
-elif cmd == "stop":
-    asg.stop_gpu()
-    print("GPU ASG stopping...")
-elif cmd == "status":
-    print(asg.get_asg_status())
-else:
-    print("Unknown command")
+if __name__ == "__main__":
+    app()

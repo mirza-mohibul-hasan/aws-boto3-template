@@ -1,9 +1,9 @@
 [project]
 name = "aws-boto3-template"
 version = "0.1.0"
-description = "Add your description here"
+description = "A small boto3 CLI template for controlling an AWS GPU Auto Scaling Group."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
     "boto3>=1.42.44",
     "loguru>=0.7.3",
@@ -12,3 +12,13 @@ dependencies = [
     "rich>=14.3.2",
     "typer>=0.21.1",
 ]
+
+[project.scripts]
+aws-gpu-control = "app.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
