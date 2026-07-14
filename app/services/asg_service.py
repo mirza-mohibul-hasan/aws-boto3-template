@@ -14,7 +14,9 @@ class AutoScalingService:
         )
 
         if not response["AutoScalingGroups"]:
-            raise Exception("ASG not found")
+            raise RuntimeError(
+                f"Auto Scaling Group '{self.config.gpu_asg_name}' not found"
+            )
 
         asg = response["AutoScalingGroups"][0]
 
