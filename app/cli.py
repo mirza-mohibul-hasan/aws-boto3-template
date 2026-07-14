@@ -7,6 +7,7 @@ from rich.console import Console
 from rich.table import Table
 
 from app.services.asg_service import AutoScalingService
+from app.utils.logger import logger
 
 app = typer.Typer(help="Control a GPU Auto Scaling Group with boto3.")
 console = Console()
@@ -22,6 +23,7 @@ def handle_cli_errors() -> Iterator[None]:
     try:
         yield
     except (RuntimeError, BotoCoreError, ClientError) as exc:
+        logger.error(str(exc))
         console.print(f"[bold red]Error:[/bold red] {exc}")
         raise typer.Exit(code=1)
 
